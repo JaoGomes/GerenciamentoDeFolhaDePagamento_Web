@@ -1,0 +1,113 @@
+﻿.divRedefinicaoDeSenhaPai {
+    width: 100%;
+    height: 90.5vh;
+    text-align: -webkit-center;
+}
+
+.divRedefinicaoDeSenha {
+    width: 330px;
+    height: 359px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 6vh;
+    border: 1px solid #6395CE;
+    box-shadow: 0px 2px 2px 0px rgba(99, 149, 206, 0.43);
+    transition-duration: 500ms;
+}
+
+.divRedefinicaoDeSenha:hover {
+    scale: 1.01;
+    transition-duration: 500ms;
+    cursor: default;
+}
+
+.divRedefinicaoDeSenhaBarraSuperior {
+    width: 100%;
+    height: 40px;
+    background-color: #6497d0;
+    border-radius: 9px 9px 0px 0px;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    padding-top: 8px;
+}
+
+.divCampos {
+    width: 100%;
+    height: 250px;
+    padding-top: 20px;
+}
+
+.divSenha {
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6497d0;
+    margin-bottom: 30px;
+}
+
+.inputSenha {
+    width: 300px;
+    height: 40px;
+    padding-left: 15px;
+    border-radius: 50px;
+    background-color: #cee3ff;
+    border: 1px solid #6497d0;
+    color: #6497d0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.inputSenha::placeholder {
+    color: #6497d0;
+    opacity: 50%;
+    font-weight: 400;
+    font-size: 12px;
+    font-family: Montserrat;
+}
+
+.inputSenha:focus, .inputSenha:hover {
+    outline: 1px solid #6497d0;
+}
+
+.divBtnRedefinirSenha {
+    width: 100%;
+    padding-top: 4px;
+}
+
+.btnRedefinirSenha {
+    width: 280px;
+    height: 40px;
+    background-color: #6497d0;
+    border-radius: 50px;
+    margin-bottom: 12px;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    transition-duration: 500ms;
+}
+
+.btnRedefinirSenha:hover {
+    background-color: #cee3ff;
+    color: #6497d0;
+    border: 1px solid #6395CE;
+    scale: 1.01;
+    transition-duration: 500ms;
+}
+
+.txtVoltar {
+    font-family: Montserrat;
+    font-size: 12px;
+    text-decoration: underline;
+    color: #6497d0;
+    font-weight: 450;
+    opacity: 90%;
+}

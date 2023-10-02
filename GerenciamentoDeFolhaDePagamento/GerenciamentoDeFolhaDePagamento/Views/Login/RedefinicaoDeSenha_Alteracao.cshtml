@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "RedefinicaoDeSenha_Alteracao";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    @Styles.Render("~/Content/RedefinicaoDeSenha_Alteracao.css")
+</head>
+<body>
+    <!-- Conteudo -->
+    <div class="divRedefinicaoDeSenhaPai">
+        <div class="divRedefinicaoDeSenha">
+            <div class="divRedefinicaoDeSenhaBarraSuperior">
+                REDEFINIÇÃO DE SENHA
+            </div>
+            <div class="divCampos">
+                <div class="divSenha">
+                    <div class="divTextoSenha">
+                        NOVA SENHA
+                    </div>
+                    <input type="text" class="inputSenha" placeholder="SENHA" />
+                </div>
+                <div class="divSenha">
+                    <div class="divTextoSenha">
+                        CONFIRMAÇÃO NOVA SENHA
+                    </div>
+                    <input type="text" class="inputSenha" placeholder="SENHA" />
+                </div>
+                <hr>
+                <div class="divBtnRedefinirSenha">
+                    <button type="submit" class="btnRedefinirSenha">
+                        REDEFINIR SENHA
+                    </button>
+                    <a class="txtVoltar" href="">
+                        VOLTAR
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

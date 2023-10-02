@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "EsqueciSenha";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    @Styles.Render("~/Content/RedefinicaoDeSenha.css")
+</head>
+<body>
+    <!-- Conteudo -->
+    <div class="divRedefinicaoDeSenhaPai">
+        <div class="divRedefinicaoDeSenha">
+            <div class="divRedefinicaoDeSenhaBarraSuperior">
+                REDEFINIÇÃO DE SENHA
+            </div>
+            <div class="txtDescricao">
+                INFORME O E-MAIL PARA O QUAL DESEJA REDEFINIR A SUA SENHA
+            </div>
+            <div class="divCampos">
+                <div class="divEmail">
+                    <div class="divTextoEmail">
+                        EMAIL
+                    </div>
+                    <input type="text" class="inputEmail" placeholder="EMAIL" />
+                </div>
+                <hr>
+                <div class="divBtnRedefinirSenha">
+                    <button type="submit" class="btnRedefinirSenha">
+                        REDEFINIR SENHA
+                    </button>
+                    <a class="txtVoltar" href="">
+                        VOLTAR
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

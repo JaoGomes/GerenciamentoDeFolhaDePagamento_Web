@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - GoodPlace</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/layout.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header divMenu">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="divLogoGoodPlace">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img class="logoGoodPlace" src="~/Content/Img/LogoGoodPlace2.png"/>
+                    </a>
+                </div>
+                <div class="divNomeMenu">
+                    <div class="txtNomeMenu">João Victor de Moraes Gomes</div>
+                </div>
+                <div class="divBtnEntrar">
+                    <a class="btnEntrar" href="@Url.Action("Index", "Home")">ENTRAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Feito por João Gomes</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        @Styles.Render("~/Content/Login.css")
+    </head>
+    <body>
+        <!-- Conteudo -->
+        <div class="divLoginPai">
+            <div class="divLogin">
+                <div class="divLoginBarraSuperior">
+                    LOGIN
+                </div>
+                <div class="divCampos">
+                    <div class="divEmail">
+                        <div class="divTextoEmailSenha">
+                            EMAIL
+                        </div>
+                        <input type="text" class="inputEmailSenha" placeholder="EMAIL" />
+                    </div>
+                    <div class="divSenha">
+                        <div class="divTextoEmailSenha">
+                            SENHA
+                        </div>
+                        <input type="password" class="inputEmailSenha" placeholder="SENHA" />
+                        <div class="divEsqueciSenha">
+                            <a href="" class="txtEsqueciSenha">
+                                ESQUECI A SENHA
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="divBtnEntrarLogin">
+                        <button type="submit" class="btnEntrarLogin">
+                            ENTRAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

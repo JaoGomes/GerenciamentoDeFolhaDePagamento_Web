@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        @Styles.Render("~/Content/Home.css")
+    </head>
+    <body>
+        <div class="divGeral">
+            <div class="divGeralUm">
+                <!-- BATER PONTO -->
+                <div class="divPrincipal" ">
+                    <div class="divBarraPrimaria">
+                        BATER PONTO
+                    </div>
+                    <div class="divBarraSecundaria">
+                        <div style="width: 50%; padding-top: 2px;">
+                            <!-- DATA (Ex: 01/01/2024) -->
+                            <div style="font-size: 14px;" class="divDataCompleta">
+                                @DateTime.Now.ToShortDateString() 
+                            </div>
+                            <!-- SEMANA (Ex: sexta-feira) -->
+                            <div style="line-height: 14px;" class="divDataCompleta">
+                                @{ 
+                                    string Data = DateTime.Now.ToLongDateString();
+                                    string Semana = string.Empty;
+
+                                    for (int a = 0; Data[a].ToString() != ","; a++)
+                                    {
+                                        Semana += Data[a].ToString();
+                                    }
+                                }
+                                @Semana.ToUpper()
+                            </div>
+                        </div>
+                        <!-- HORÁRIO (Ex: 22:06:12) -->
+                        <div class="divHoraCompleta">
+                            @DateTime.Now.ToLongTimeString()
+                            <!-- Deixar data atualizando automaticamente -->
+                        </div>
+                    </div>
+                    <div class="divBotoes">
+                        <!-- ENTRADA -->
+                        <div class="divBotao divEntrada">
+                            <div class="divTextoBotaoEntrada">
+                                ENTRADA
+                            </div>
+                            <div class="divIconeBotaoEntrada">
+                                <img src="" />
+                            </div>
+                        </div>
+                        <!-- PAUSA -->
+                        <div class="divBotao divPausa">
+
+                        </div>
+                        <!-- RETORNO -->
+                        <div class="divBotao divRetorno">
+
+                        </div>
+                        <!-- SAÍDA -->
+                        <div class="divBotao divSaida">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divGeralDois">
+                <div class="divSecundaria">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
