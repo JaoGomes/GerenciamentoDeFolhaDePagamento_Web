@@ -11,9 +11,15 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            /*
+            Validar Validacao = new Validar();
+            string Nome = Validacao.Main();
+
+            ViewBag.Nome = Nome;
+            */
             return View();
         }
-
+        
         public ActionResult RedefinicaoDeSenha()
         {
             return View();

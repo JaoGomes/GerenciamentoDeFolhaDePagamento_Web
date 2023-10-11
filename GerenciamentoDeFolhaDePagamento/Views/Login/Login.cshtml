@@ -11,9 +11,9 @@
     <body>
         <!-- Conteudo -->
         <div class="divLoginPai">
-            <div class="divLogin">
+            <form class="divLogin" method="post" action="~/Login/Validar">
                 <div class="divLoginBarraSuperior">
-                    LOGIN
+                    LOGIN - @ViewBag.Nome
                 </div>
                 <div class="divCampos">
                     <div class="divEmail">
@@ -40,7 +40,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </body>
 </html>
