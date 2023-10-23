@@ -100,7 +100,7 @@
 
 .divBtnEntrarLogin {
     width: 100%;
-    padding-top: 4px;
+    padding-top: 6px;
 }
 
 .btnEntrarLogin {
@@ -122,4 +122,17 @@
     border: 1px solid #6395CE;
     scale: 1.01;
     transition-duration: 500ms;
+}
+
+.alertaFormulario {
+    display: flex;
+    align-items: center;
+}
+
+.iconAlerta {
+    margin-right: 10px;
+}
+
+.hrLogin {
+    color: rgba(99, 149, 206, 1) !important;
 }

@@ -49,6 +49,7 @@
     display: flex;
     padding: 10px;
     transition-duration: 250ms;
+    text-decoration: none;
 }
 
 .divBotao:hover {
@@ -238,4 +239,32 @@
     text-align: center;
     padding-top: 5px;
     opacity: 95%;
+}
+
+.divSemRegistro {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    transition-duration: 250ms;
+    cursor: pointer;
+    margin-bottom: 15px;
+    opacity: 80%;
+}
+
+.divTextoSemRegistro {
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 600;
+    color: #3f5f83;
+}
+
+.alertaFormulario {
+    display: flex;
+    align-items: center;
+}
+
+.iconAlerta {
+    margin-right: 10px;
 }

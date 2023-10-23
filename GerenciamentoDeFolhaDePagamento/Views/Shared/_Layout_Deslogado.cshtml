@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - GoodPlace</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/layout.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="divMenuLayout navbar bg-white navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header divMenu">
+                <div class="divLogoGoodPlace">
+                    <a href="@if (Helper.Sessao.CodFuncionario == -1) { Url.Action("Login", "Login"); } else { Url.Action("Home", "Home"); }">
+                        <img class="logoGoodPlace" src="~/Content/Img/LogoGoodPlace2.png"/>
+                    </a>
+                </div>
+                <div class="divNomeMenu">
+                </div>
+                <div class="divBtnEntrar">
+                    <a class="btnEntrar" href="@Url.Action("Login", "Login")">ENTRAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <!--
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Feito por João Gomes</p>
+        </footer>
+        -->
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

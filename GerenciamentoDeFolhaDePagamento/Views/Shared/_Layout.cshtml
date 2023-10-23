@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    GerenciamentoDeFolhaDePagamento.Controllers.ConsultaModel modelConsulta = new GerenciamentoDeFolhaDePagamento.Controllers.ConsultaModel();
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,28 +13,45 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div style="min-height: 52px;" class="navbar bg-white navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header divMenu">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <div class="divLogoGoodPlace">
-                    <a href="@Url.Action("Index", "Home")">
-                        <img class="logoGoodPlace" src="~/Content/Img/LogoGoodPlace2.png"/>
+                    <a href="@if (Helper.Sessao.CodFuncionario == -1) { Url.Action("Login", "Login"); } else { Url.Action("Home", "Home"); }">
+                        <img class="logoGoodPlace" src="~/Content/Img/LogoGoodPlace2.png" />
                     </a>
                 </div>
                 <div class="divNomeMenu">
-                    <div class="txtNomeMenu">João Victor de Moraes Gomes</div>
+                    <div class="txtNomeMenu">
+                        @modelConsulta.PegarNomeFuncionario(Helper.Sessao.CodFuncionario).ToString()
+                    </div>
                 </div>
-                <div class="divBtnEntrar">
-                    <a class="btnEntrar" href="@Url.Action("Index", "Home")">ENTRAR</a>
+                <div class="divBtnSair">
+                    <button type="button" class="btnSair" data-bs-toggle="modal" data-bs-target="#exampleModal">SAIR</button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal modalConfirmacao fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Montserrat; text-transform: uppercase; font-size: 16px !important; color: #3f5f83; ">Confirmação</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja sair?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <a class="btnModalSair btn btn-primary" href="@Url.Action("Sair", "Home")">Sair</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <!--

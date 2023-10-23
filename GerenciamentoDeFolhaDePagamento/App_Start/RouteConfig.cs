@@ -14,14 +14,50 @@ namespace GerenciamentoDeFolhaDePagamento
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Validar",
-                url: "Login/Validar/{id}",
-                defaults: new { controller = "Login", action = "Validar", id = UrlParameter.Optional }
+                name: "Entrar",
+                url: "Login/Entrar",
+                defaults: new { controller = "Login", action = "Entrar", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Home",
+                url: "Home",
+                defaults: new { controller = "Home", action = "Home", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Sair",
+                url: "Home/Sair",
+                defaults: new { controller = "Home", action = "Sair", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Entrada",
+                url: "Home/Entrada",
+                defaults: new { controller = "Home", action = "Entrada", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Pausa",
+                url: "Home/Pausa",
+                defaults: new { controller = "Home", action = "Pausa", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Retorno",
+                url: "Home/Retorno",
+                defaults: new { controller = "Home", action = "Retorno", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Saida",
+                url: "Home/Saida",
+                defaults: new { controller = "Home", action = "Saida", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "",
                 defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
             );
         }
