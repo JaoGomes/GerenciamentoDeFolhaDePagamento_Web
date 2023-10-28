@@ -56,6 +56,30 @@ namespace GerenciamentoDeFolhaDePagamento
             );
 
             routes.MapRoute(
+                name: "Redefinicao",
+                url: "Login/Redefinicao",
+                defaults: new { controller = "Login", action = "RedefinicaoDeSenha", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Redefinicao_Redefinir",
+                url: "Login/Redefinicao_Redefinir",
+                defaults: new { controller = "Login", action = "Redefinicao_Redefinir", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Alteracao",
+                url: "Login/Alteracao",
+                defaults: new { controller = "Login", action = "RedefinicaoDeSenha_Alteracao", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Alteracao_Redefinir",
+                url: "Login/Alteracao_Redefinir",
+                defaults: new { controller = "Login", action = "Alteracao_Redefinir", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "",
                 defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }

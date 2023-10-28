@@ -9,19 +9,14 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
 {
     public class HomeController : Controller
     {
-        /*
-            FAZER LÓGICA
-            - Se o usuário já estiver conectado, entrar no gerenciamento de folha automatiamente.
-            - Caso o usuário não esteja conectado, redirecionar automaticamente para a tela de login.
-        */
         public ActionResult Home()
         {
             int CodFuncionario = Helper.Sessao.CodFuncionario;
 
             if(CodFuncionario != -1)
             {
-                ConsultaModel modelConsulta = new ConsultaModel();
-                ViewBag.TabelaPontoFuncionario = modelConsulta.PegarPontoFuncionario(CodFuncionario);
+                Models.HomeModel modelHome = new Models.HomeModel();
+                ViewBag.TabelaPontoFuncionario = modelHome.PegarPontoFuncionario(CodFuncionario);
 
                 return View();
             }
@@ -88,6 +83,7 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
         public ActionResult Sair()
         {
             Helper.Sessao.CodFuncionario = -1;
+            Helper.Sessao.CodFuncionario_Redefinicao = -1;
             return RedirectToRoute("Default");
         }
 

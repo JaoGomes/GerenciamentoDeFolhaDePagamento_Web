@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Web.Mvc;
+using System.Data;
 
 namespace GerenciamentoDeFolhaDePagamento.Models
 {
@@ -35,11 +36,11 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                         Semana += DataLonga[a].ToString();
                     }
 
-                    sqlCadastroPonto = "insert into ponto (CodFuncionario, DataPonto, SemanaPonto, HoraEntrada, HoraPausa, HoraRetorno, HoraSaida, Total) values(" + Helper.Sessao.CodFuncionario.ToString() + ", '" + Data + "', '" + Semana.ToUpper() + "', '" + Entrada + "', 'xx:xx', 'xx:xx', 'xx:xx', 0);";
+                    sqlCadastroPonto = "INSERT INTO ponto (CodFuncionario, DataPonto, SemanaPonto, HoraEntrada, HoraPausa, HoraRetorno, HoraSaida, Total) VALUES(" + Helper.Sessao.CodFuncionario.ToString() + ", '" + Data + "', '" + Semana.ToUpper() + "', '" + Entrada + "', 'xx:xx', 'xx:xx', 'xx:xx', 0);";
 
                     try
                     {
-                        Controllers.ConexaoModel modelConexao = new Controllers.ConexaoModel();
+                        ConexaoModel modelConexao = new ConexaoModel();
                         MySqlCommand cmdCadastrarPonto = new MySqlCommand();
                         cmdCadastrarPonto.Connection = modelConexao.AbrirConexaoBD();
                         cmdCadastrarPonto.CommandText = sqlCadastroPonto;
@@ -61,11 +62,11 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                 if (Helper.Sessao.SituacaoCadastroPonto == 1)
                 {
                     string Pausa = DateTime.Now.ToShortTimeString();
-                    sqlCadastroPonto = "update ponto set HoraPausa = '" + Pausa + "' order by CodPonto desc limit 1;";
+                    sqlCadastroPonto = "UPDATE ponto SET HoraPausa = '" + Pausa + "' ORDER BY CodPonto DESC LIMIT 1;";
 
                     try
                     {
-                        Controllers.ConexaoModel modelConexao = new Controllers.ConexaoModel();
+                        ConexaoModel modelConexao = new ConexaoModel();
                         MySqlCommand cmdCadastrarPonto = new MySqlCommand();
                         cmdCadastrarPonto.Connection = modelConexao.AbrirConexaoBD();
                         cmdCadastrarPonto.CommandText = sqlCadastroPonto;
@@ -87,11 +88,11 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                 if (Helper.Sessao.SituacaoCadastroPonto == 2)
                 {
                     string Retorno = DateTime.Now.ToShortTimeString();
-                    sqlCadastroPonto = "update ponto set HoraRetorno = '" + Retorno + "' order by CodPonto desc limit 1;";
+                    sqlCadastroPonto = "UPDATE ponto SET HoraRetorno = '" + Retorno + "' ORDER BY CodPonto DESC LIMIT 1;";
 
                     try
                     {
-                        Controllers.ConexaoModel modelConexao = new Controllers.ConexaoModel();
+                        ConexaoModel modelConexao = new ConexaoModel();
                         MySqlCommand cmdCadastrarPonto = new MySqlCommand();
                         cmdCadastrarPonto.Connection = modelConexao.AbrirConexaoBD();
                         cmdCadastrarPonto.CommandText = sqlCadastroPonto;
@@ -114,11 +115,11 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                 {
                     string Saida = DateTime.Now.ToShortTimeString();
                     string Total = "0";
-                    sqlCadastroPonto = "update ponto set HoraSaida = '" + Saida + "', Total = " + Total + " order by CodPonto desc limit 1;";
+                    sqlCadastroPonto = "UPDATE ponto SET HoraSaida = '" + Saida + "', Total = " + Total + " ORDER BY CodPonto DESC LIMIT 1;";
 
                     try
                     {
-                        Controllers.ConexaoModel modelConexao = new Controllers.ConexaoModel();
+                        ConexaoModel modelConexao = new ConexaoModel();
                         MySqlCommand cmdCadastrarPonto = new MySqlCommand();
                         cmdCadastrarPonto.Connection = modelConexao.AbrirConexaoBD();
                         cmdCadastrarPonto.CommandText = sqlCadastroPonto;
@@ -162,6 +163,33 @@ namespace GerenciamentoDeFolhaDePagamento.Models
             {
                 return "Algo de errado não está certo!";
             }
+        }
+
+        public DataTable PegarPontoFuncionario(int CodFuncionario)
+        {
+            string sqlPegarPontoFuncionario = "SELECT * FROM ponto WHERE CodFuncionario = " + CodFuncionario + " ORDER BY CodPonto DESC;";
+            string DataPonto = string.Empty;
+            string SemanaPonto = string.Empty;
+            string HoraEntrada = string.Empty;
+            string HoraPausa = string.Empty;
+            string HoraRetorno = string.Empty;
+            string HoraSaida = string.Empty;
+            string Total = string.Empty;
+            DataTable TabelaPontoFuncionario = new DataTable();
+
+            MySqlCommand cmdPegarPontoFuncionario = new MySqlCommand();
+            cmdPegarPontoFuncionario.CommandText = sqlPegarPontoFuncionario;
+
+            ConexaoModel modelConexao = new ConexaoModel();
+            cmdPegarPontoFuncionario.Connection = modelConexao.AbrirConexaoBD();
+
+            MySqlDataAdapter adapterPontoFuncionario = new MySqlDataAdapter();
+            adapterPontoFuncionario.SelectCommand = cmdPegarPontoFuncionario;
+
+            adapterPontoFuncionario.Fill(TabelaPontoFuncionario);
+            modelConexao.FecharConexaoBD();
+
+            return TabelaPontoFuncionario;
         }
     }
 }

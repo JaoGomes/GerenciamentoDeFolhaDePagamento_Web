@@ -9,5 +9,7 @@ namespace Helper
     {
         public static int CodFuncionario { get; set; } = -1;
         public static int SituacaoCadastroPonto { get; set; } = 0;
+
+        public static int CodFuncionario_Redefinicao { get; set; } = -1;
     }
 }

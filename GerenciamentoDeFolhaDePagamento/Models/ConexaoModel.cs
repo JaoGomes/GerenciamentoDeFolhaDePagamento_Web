@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MySql.Data.MySqlClient;
 
-namespace GerenciamentoDeFolhaDePagamento.Controllers
+namespace GerenciamentoDeFolhaDePagamento.Models
 {
     public class ConexaoModel
     {

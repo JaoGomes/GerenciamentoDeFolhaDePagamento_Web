@@ -1,5 +1,5 @@
 ﻿@{
-    GerenciamentoDeFolhaDePagamento.Controllers.ConsultaModel modelConsulta = new GerenciamentoDeFolhaDePagamento.Controllers.ConsultaModel();
+    GerenciamentoDeFolhaDePagamento.Models.Layout modelLayout = new GerenciamentoDeFolhaDePagamento.Models.Layout();
 }
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="divNomeMenu">
                     <div class="txtNomeMenu">
-                        @modelConsulta.PegarNomeFuncionario(Helper.Sessao.CodFuncionario).ToString()
+                        @modelLayout.PegarNomeFuncionario(Helper.Sessao.CodFuncionario).ToString()
                     </div>
                 </div>
                 <div class="divBtnSair">

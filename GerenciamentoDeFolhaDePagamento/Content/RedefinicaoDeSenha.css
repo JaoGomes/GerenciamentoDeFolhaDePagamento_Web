@@ -120,3 +120,17 @@
     font-weight: 450;
     opacity: 90%;
 }
+
+.hrRedefinicao {
+    color: rgba(99, 149, 206, 1) !important;
+}
+
+.alertaFormulario {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.iconAlerta {
+    margin-right: 10px;
+}

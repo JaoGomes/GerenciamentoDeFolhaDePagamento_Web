@@ -20,20 +20,28 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
         
         public ActionResult RedefinicaoDeSenha()
         {
-            if (Helper.Sessao.CodFuncionario == -1)
+            if (Helper.Sessao.CodFuncionario != -1)
             {
-                return View();
+                return RedirectToRoute("Home");
             }
-            return RedirectToRoute("Home");
+
+            return View();
         }
 
         public ActionResult RedefinicaoDeSenha_Alteracao()
         {
-            if (Helper.Sessao.CodFuncionario == -1)
+            if (Helper.Sessao.CodFuncionario != -1)
             {
-                return View();
+                TempData["MensagemErro"] = "Faça Login!";
+                return RedirectToRoute("Home");
             }
-            return RedirectToRoute("Home");
+            else if(Helper.Sessao.CodFuncionario_Redefinicao == -1)
+            {
+                TempData["MensagemErro"] = "Email inválido, tente novamente!";
+                return RedirectToRoute("Redefinicao");
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -43,11 +51,12 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
             {
                 LoginEmail = LoginEmail.ToLower();
 
-                ConsultaModel modelConsulta = new ConsultaModel();
-                int CodFuncionario = modelConsulta.ValidarUsuario(LoginEmail, LoginSenha);
-                //Armazenar o CodFuncionario na Sessao Global
+                Models.LoginModel modelLogin = new Models.LoginModel();
+                
+                int CodFuncionario = modelLogin.ValidarUsuario(LoginEmail, LoginSenha);
 
-                if(CodFuncionario != -1)
+                //Armazenar o CodFuncionario na Sessao Global
+                if (CodFuncionario != -1)
                 {
                     Helper.Sessao.CodFuncionario = CodFuncionario;
                     return RedirectToRoute("Home");
@@ -61,6 +70,52 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
                 TempData["MensagemErro"] = "Ops, não conseguimos realizar seu login, tente novamente. Detalhe do erro: " + erro.Message;
                 return RedirectToRoute("Default");
             }
+        }
+
+        [HttpPost]
+        public ActionResult Redefinicao_Redefinir(string RedefinicaoEmail)
+        {
+            Models.LoginModel modelLogin = new Models.LoginModel();
+            int CodFuncionario = modelLogin.ValidarEmail(RedefinicaoEmail);
+
+            if (CodFuncionario != -1)
+            {
+                Helper.Sessao.CodFuncionario_Redefinicao = CodFuncionario;
+                return RedirectToRoute("Alteracao");
+            }
+            else
+            {
+                TempData["MensagemErro"] = "Email inválido, tente novamente!";
+            }
+
+            return RedirectToRoute("Redefinicao");
+        }
+
+        [HttpPost]
+        public ActionResult Alteracao_Redefinir(string PrimeiraSenha, string SegundaSenha)
+        {
+            Models.LoginModel modelLogin = new Models.LoginModel();
+
+            if (PrimeiraSenha == SegundaSenha)
+            {
+                string RetornoMensagem = modelLogin.RedefinirSenha(PrimeiraSenha);
+                TempData["MensagemErro"] = RetornoMensagem;
+
+                if (RetornoMensagem == "Senha alterada com sucesso!")
+                {
+                    return RedirectToRoute("Default");
+                }
+                else
+                {
+                    return RedirectToRoute("Redefinicao");
+                }
+            }
+            else
+            {
+                TempData["MensagemErro"] = "A confirmação de senha precisa ser igual!";
+            }
+
+            return RedirectToRoute("Alteracao");
         }
     }
 }
