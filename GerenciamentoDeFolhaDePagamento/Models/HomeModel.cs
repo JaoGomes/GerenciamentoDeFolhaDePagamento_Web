@@ -51,6 +51,7 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                     }
                     catch (Exception e)
                     {
+                        //Mensagem de erro
                         return "Erro ao tentar salvar a Entrada! Erro: " + e.Message.ToString();
                     }
                 }
@@ -77,6 +78,7 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                     }
                     catch (Exception e)
                     {
+                        //Mensagem de erro
                         return "Erro ao tentar salvar a Pausa! Erro: " + e.Message.ToString();
                     }
                 }
@@ -103,6 +105,7 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                     }
                     catch (Exception e)
                     {
+                        //Mensagem de erro
                         return "Erro ao tentar salvar o Retorno! Erro: " + e.Message.ToString();
                     }
                 }
@@ -126,10 +129,20 @@ namespace GerenciamentoDeFolhaDePagamento.Models
                         cmdCadastrarPonto.ExecuteNonQuery();
                         modelConexao.FecharConexaoBD();
                         Helper.Sessao.SituacaoCadastroPonto = 0;
-                        return "Cadastrado!";
+
+                        if(CalcularTotalPonto() == "Cadastrado!")
+                        {
+                            return "Cadastrado!";
+                        }
+                        else
+                        {
+                            //Mensagem de erro
+                            return "Erro [pegar horários de ponto]";
+                        }
                     }
                     catch (Exception e)
                     {
+                        //Mensagem de erro
                         return "Erro ao tentar salvar a Saida! Erro: " + e.Message.ToString();
                     }
                 }
@@ -161,8 +174,103 @@ namespace GerenciamentoDeFolhaDePagamento.Models
             }
             else
             {
+                //Mensagem de erro
                 return "Algo de errado não está certo!";
             }
+        }
+
+        public string CalcularTotalPonto()
+        {
+            int TotalPonto = 0;
+            string HorarioEntrada, HorarioPausa, HorarioRetorno, HorarioSaida;
+            int HorarioTrabalho, MinutoTrabalho;
+            DataTable tabelaHorarioPonto = new DataTable();
+            string sqlConsultaPonto = "SELECT HoraEntrada, HoraPausa, HoraRetorno, HoraSaida FROM Ponto ORDER BY CodPonto DESC LIMIT 1";
+
+            ConexaoModel modelConexao = new ConexaoModel();
+            MySqlCommand cmdCalcularTotalPonto = new MySqlCommand();
+            MySqlDataAdapter adapterHorarioPonto = new MySqlDataAdapter();
+
+            try
+            {
+                cmdCalcularTotalPonto.Connection = modelConexao.AbrirConexaoBD();
+                cmdCalcularTotalPonto.CommandText = sqlConsultaPonto;
+                adapterHorarioPonto.SelectCommand = cmdCalcularTotalPonto;
+                adapterHorarioPonto.Fill(tabelaHorarioPonto);
+                modelConexao.FecharConexaoBD();
+
+                foreach (DataRow linhaTabelaHorarioPonto in tabelaHorarioPonto.Rows)
+                {
+                    //Pegando todos os horários
+                    HorarioEntrada = linhaTabelaHorarioPonto["HoraEntrada"].ToString();
+                    HorarioPausa = linhaTabelaHorarioPonto["HoraPausa"].ToString();
+                    HorarioRetorno = linhaTabelaHorarioPonto["HoraRetorno"].ToString();
+                    HorarioSaida = linhaTabelaHorarioPonto["HoraSaida"].ToString();
+
+                    //Transformando em minuto e somando
+                    TotalPonto = (SomarIntervalo(HorarioEntrada, HorarioPausa) + SomarIntervalo(HorarioRetorno, HorarioSaida));
+                }
+
+                //Cadastrando o Total de Ponto
+                string sqlCadastroTotalPonto = "UPDATE ponto SET Total = " + TotalPonto.ToString() + " ORDER BY CodPonto DESC LIMIT 1;";
+                MySqlCommand cmdCadastrarTotalPonto = new MySqlCommand();
+                cmdCadastrarTotalPonto.Connection = modelConexao.AbrirConexaoBD();
+                cmdCadastrarTotalPonto.CommandText = sqlCadastroTotalPonto;
+                cmdCadastrarTotalPonto.ExecuteNonQuery();
+                modelConexao.FecharConexaoBD();
+                
+                //Mensagem de aviso
+                return "Cadastrado!";
+            }
+            catch (Exception e)
+            {
+                //Mensagem de erro
+                return "Erro [pegar horários de ponto]";
+            }
+        }
+
+        public int SomarIntervalo(string HorarioUm, string HorarioDois)
+        {
+            int TotalMinutos = 0;
+            int intHoraPontoUm , intMinutoPontoUm;
+            int intHoraPontoDois, intMinutoPontoDois;
+
+            string HoraPontoUm = string.Empty, MinutoPontoUm = string.Empty;
+            string HoraPontoDois = string.Empty, MinutoPontoDois = string.Empty;
+
+            //Horario Um
+            for (int a = 0; a <= 4; a++)
+            {
+                if(a <= 1)
+                {
+                    HoraPontoUm += HorarioUm[a];
+                }
+                else if (a >= 3)
+                {
+                    MinutoPontoUm += HorarioUm[a];
+                }
+            }
+
+            //Horario Dois
+            for (int a = 0; a <= 4; a++)
+            {
+                if (a <= 1)
+                {
+                    HoraPontoDois += HorarioDois[a];
+                }
+                else if (a >= 3)
+                {
+                    MinutoPontoDois += HorarioDois[a];
+                }
+            }
+
+            intHoraPontoUm = int.Parse(HoraPontoUm);
+            intHoraPontoDois = int.Parse(HoraPontoDois);
+            intMinutoPontoUm = int.Parse(MinutoPontoUm);
+            intMinutoPontoDois = int.Parse(MinutoPontoDois);
+
+            TotalMinutos = ((intHoraPontoDois - intHoraPontoUm) * 60) + (intMinutoPontoDois - intMinutoPontoUm);
+            return TotalMinutos;
         }
 
         public DataTable PegarPontoFuncionario(int CodFuncionario)
