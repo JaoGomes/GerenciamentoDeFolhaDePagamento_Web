@@ -269,3 +269,44 @@
 .iconAlerta {
     margin-right: 10px;
 }
+
+/* ANDROID */
+
+@media screen and (max-width: 800px) {
+    .divGeral {
+        display: block !important;
+        text-align: -webkit-center !important;
+    }
+
+    .divGeralUm {
+        width: auto !important;
+    }
+
+    .divGeralDois {
+        margin-top: 25px !important;
+        width: auto !important;
+    }
+
+    .divMenu {
+        display: block !important;
+    }
+
+    .divNomeMenu {
+        display: inline-flex !important;
+        width: auto !important;
+        margin-left: 58px !important;
+        border-right: none !important;
+    }
+
+    .divBtnSair {
+        position: absolute !important;
+        margin-top: -30px !important;
+        margin-left: -26px !important;
+    }
+}
+
+@media only screen and (max-width: 1010px) {
+    .txtNomeMenu {
+        width: auto !important;
+    }
+}

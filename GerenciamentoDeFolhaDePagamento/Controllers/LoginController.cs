@@ -37,7 +37,7 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
             }
             else if(Helper.Sessao.CodFuncionario_Redefinicao == -1)
             {
-                TempData["MensagemErro"] = "Email inválido, tente novamente!";
+                TempData["MensagemErro"] = "CPF inválido, tente novamente!";
                 return RedirectToRoute("Redefinicao");
             }
 
@@ -73,10 +73,10 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
         }
 
         [HttpPost]
-        public ActionResult Redefinicao_Redefinir(string RedefinicaoEmail)
+        public ActionResult Redefinicao_Redefinir(string RedefinicaoCpf)
         {
             Models.LoginModel modelLogin = new Models.LoginModel();
-            int CodFuncionario = modelLogin.ValidarEmail(RedefinicaoEmail);
+            int CodFuncionario = modelLogin.ValidarCpf(RedefinicaoCpf);
 
             if (CodFuncionario != -1)
             {
@@ -85,7 +85,7 @@ namespace GerenciamentoDeFolhaDePagamento.Controllers
             }
             else
             {
-                TempData["MensagemErro"] = "Email inválido, tente novamente!";
+                TempData["MensagemErro"] = "CPF inválido, tente novamente!";
             }
 
             return RedirectToRoute("Redefinicao");

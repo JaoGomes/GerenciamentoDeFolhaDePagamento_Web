@@ -125,3 +125,11 @@
 .iconAlerta {
     margin-right: 10px;
 }
+
+/* ANDROID */
+
+@media screen and (max-width: 800px) {
+    .divBtnRedefinirSenha {
+        display: block !important;
+    }
+}

@@ -37,10 +37,10 @@ namespace GerenciamentoDeFolhaDePagamento.Models
             return CodFuncionario;
         }
 
-        public int ValidarEmail(string Email)
+        public int ValidarCpf(string Cpf)
         {
             int CodFuncionario = -1;
-            string sqlValidarUsuario = "SELECT CodFuncionario FROM funcionario WHERE Email = '" + Email + "';";
+            string sqlValidarUsuario = "SELECT CodFuncionario FROM funcionario WHERE Cpf = '" + Cpf + "';";
 
             ConexaoModel modelConexao = new ConexaoModel();
             MySqlCommand cmdValidarUsuario = new MySqlCommand();
